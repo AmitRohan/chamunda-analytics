@@ -20,4 +20,9 @@ public class HomeViewModel extends ViewModel {
     public LiveData<ArrayList<TableC>> getTables() {
         return  tables;
     }
+
+    public void addTable(TableC _table){
+        tables.getValue().add(_table);
+        tables.postValue(tables.getValue());
+    }
 }

@@ -11,7 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import co.light1011.chamundalogs.R;
+import co.light1011.chamundalogs.model.TableC;
 
 public class HomeFragment extends Fragment {
 
@@ -22,6 +25,7 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
         final TextView textView = root.findViewById(R.id.text_no_customer);
         homeViewModel.getTables().observe(getViewLifecycleOwner(), _tables -> {
 
@@ -31,6 +35,13 @@ public class HomeFragment extends Fragment {
             }
             textView.setVisibility(View.GONE);
         });
+
+        root.findViewById(R.id.addTable).setOnClickListener( v -> onAddNewTableClicked());
+
         return root;
+    }
+
+    private void onAddNewTableClicked(){
+        homeViewModel.addTable(new TableC());
     }
 }
