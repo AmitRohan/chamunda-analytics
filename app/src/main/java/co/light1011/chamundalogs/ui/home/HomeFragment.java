@@ -12,15 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 
 import co.light1011.chamundalogs.R;
 import co.light1011.chamundalogs.model.TableC;
+import co.light1011.chamundalogs.utils.ActiveTableListAdapter;
 
 public class HomeFragment extends Fragment {
 
     private RecyclerView activeTables;
+    private ActiveTableListAdapter activeTablesListAdapter;
+
     private HomeViewModel homeViewModel;
     private TextView noCustomerTextView;
 
@@ -38,6 +42,12 @@ public class HomeFragment extends Fragment {
 
         root.findViewById(R.id.addTable).setOnClickListener( v -> onAddNewTableClicked());
 
+
+        activeTablesListAdapter = new ActiveTableListAdapter(homeViewModel.getTables().getValue());
+        activeTables.setHasFixedSize(true);
+        activeTables.setLayoutManager(new StaggeredGridLayoutManager(2,1));
+        activeTables.setAdapter(activeTablesListAdapter);
+
         return root;
     }
 
@@ -49,6 +59,12 @@ public class HomeFragment extends Fragment {
                 return;
             }
             noCustomerTextView.setVisibility(View.GONE);
+            activeTables.setVisibility(View.VISIBLE);
+
+            activeTablesListAdapter.updateList(_tables);
+            activeTablesListAdapter.notifyDataSetChanged();
+
+
         }
     };
 
