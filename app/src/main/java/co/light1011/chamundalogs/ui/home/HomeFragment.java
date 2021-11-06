@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ import co.light1011.chamundalogs.model.TableC;
 
 public class HomeFragment extends Fragment {
 
+    private RecyclerView activeTables;
     private HomeViewModel homeViewModel;
     private TextView noCustomerTextView;
 
@@ -29,6 +31,9 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         noCustomerTextView = root.findViewById(R.id.text_no_customer);
+
+        activeTables = root.findViewById(R.id.activeTables);
+
         homeViewModel.getTables().observe(getViewLifecycleOwner(),tableListUpdateObserver);
 
         root.findViewById(R.id.addTable).setOnClickListener( v -> onAddNewTableClicked());
