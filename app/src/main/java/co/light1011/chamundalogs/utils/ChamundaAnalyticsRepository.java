@@ -13,7 +13,7 @@ import co.light1011.chamundalogs.model.ProductC;
 import co.light1011.chamundalogs.model.TableC;
 import co.light1011.chamundalogs.model.UserC;
 
-class ChamundaAnalyticsRepository {
+public class ChamundaAnalyticsRepository {
 
     private ProductCDAO productCDAO;
     private UserCDAO userCDAO;
