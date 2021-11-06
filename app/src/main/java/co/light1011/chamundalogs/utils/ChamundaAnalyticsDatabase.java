@@ -1,4 +1,4 @@
-package co.light1011.chamundalogs;
+package co.light1011.chamundalogs.utils;
 
 import android.content.Context;
 
