@@ -24,7 +24,8 @@ task clean(type: Delete) {
 }
 
 ext {
-    
+
     roomVersion = '2.3.0'
+    gsonVersion = '2.8.8'
 
 }
