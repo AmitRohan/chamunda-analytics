@@ -1,8 +1,22 @@
 package co.light1011.chamundalogs.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "productC_table")
 public class ProductC {
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     private String id;
+
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "price")
     private float price;
 
     public String getId() {
