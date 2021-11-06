@@ -5,49 +5,61 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 
 import co.light1011.chamundalogs.R;
 import co.light1011.chamundalogs.model.TableC;
 
-public class ActiveTableListAdapter extends RecyclerView.Adapter<ActiveTableListAdapter.ActiveTableViewHolder>{
-    private ArrayList<TableC> listdata;
+public class ActiveTableListAdapter extends ListAdapter<TableC,ActiveTableListAdapter.ActiveTableViewHolder> {
 
-    // RecyclerView recyclerView;
-    public ActiveTableListAdapter(ArrayList<TableC> listdata) {
-        this.listdata = listdata;
+    public ActiveTableListAdapter(@NonNull DiffUtil.ItemCallback<TableC> diffCallback) {
+        super(diffCallback);
     }
+
     @Override
     public ActiveTableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.item_active_table, parent, false);
-        ActiveTableViewHolder viewHolder = new ActiveTableViewHolder(listItem);
-        return viewHolder;
+        return ActiveTableViewHolder.create(parent);
     }
 
     @Override
     public void onBindViewHolder(ActiveTableViewHolder holder, int position) {
-        final TableC myListData = listdata.get(position);
-        holder.tableIndex.setText(""+ (position + 1));
+        TableC current = getItem(position);
+        holder.bind(""+(position + 1));
     }
 
+    public static class TableCDiff extends DiffUtil.ItemCallback<TableC> {
 
-    @Override
-    public int getItemCount() {
-        return listdata.size();
+        @Override
+        public boolean areItemsTheSame(@NonNull TableC oldItem, @NonNull TableC newItem) {
+            return oldItem == newItem;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull TableC oldItem, @NonNull TableC newItem) {
+            return oldItem.getUserId().equals(newItem.getUserId());
+        }
     }
 
-    public void updateList(ArrayList<TableC> tables) {
-        listdata = tables;
-    }
+    static class ActiveTableViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tableIndex;
 
-    public static class ActiveTableViewHolder extends RecyclerView.ViewHolder {
-        public TextView tableIndex;
-        public ActiveTableViewHolder(View itemView) {
+        private ActiveTableViewHolder(View itemView) {
             super(itemView);
             this.tableIndex = (TextView) itemView.findViewById(R.id.tableIndex);
+        }
+
+        public void bind(String text) {
+            tableIndex.setText(text);
+        }
+
+        static ActiveTableViewHolder create(ViewGroup parent) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_active_table, parent, false);
+            return new ActiveTableViewHolder(view);
         }
     }
 }
