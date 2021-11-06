@@ -1,12 +1,12 @@
 package co.light1011.chamundalogs.dao;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import co.light1011.chamundalogs.model.ProductC;
 
@@ -22,5 +22,5 @@ public interface ProductCDAO {
     void deleteAll();
 
     @Query("SELECT * FROM productC_table ORDER BY id ASC")
-    MutableLiveData<ArrayList<ProductC>> getProducts();
+    LiveData<List<ProductC>> getProducts();
 }

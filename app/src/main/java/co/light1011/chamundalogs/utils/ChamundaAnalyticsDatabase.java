@@ -10,9 +10,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import co.light1011.chamundalogs.dao.ProductCDAO;
+import co.light1011.chamundalogs.dao.SelectedProductCDAO;
 import co.light1011.chamundalogs.dao.TableCDAO;
 import co.light1011.chamundalogs.dao.UserCDAO;
 import co.light1011.chamundalogs.model.ProductC;
+import co.light1011.chamundalogs.model.SelectedProductC;
 import co.light1011.chamundalogs.model.TableC;
 import co.light1011.chamundalogs.model.UserC;
 
@@ -27,6 +29,7 @@ public abstract class ChamundaAnalyticsDatabase extends RoomDatabase {
     public abstract ProductCDAO productCDAO();
     public abstract UserCDAO userCDAO();
     public abstract TableCDAO tableCDAO();
+    public abstract SelectedProductCDAO selectedProductCDAO();
 
     private static volatile ChamundaAnalyticsDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;

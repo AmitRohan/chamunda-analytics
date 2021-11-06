@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import co.light1011.chamundalogs.utils.SelectedProductListConverter;
 
 @Entity(tableName = "tableC_table")
 public class TableC {
@@ -16,32 +19,34 @@ public class TableC {
     private String id;
 
     @ColumnInfo(name = "user")
-    private UserC userC;
+    private String userId;
 
     @ColumnInfo(name = "products")
-    private ArrayList<ProductC> productCs;
+    @TypeConverters(SelectedProductListConverter.class)
+    private List<SelectedProductC> selectedProductCS;
 
+    public List<SelectedProductC> getSelectedProductCS() {
+        return selectedProductCS;
+    }
+
+    public void setSelectedProductCS(List<SelectedProductC> selectedProductCS) {
+        this.selectedProductCS = selectedProductCS;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public UserC getUserC() {
-        return userC;
-    }
-
-    public ArrayList<ProductC> getProductCs() {
-        return productCs;
-    }
-
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
-    }
-
-    public void setUserC(UserC userC) {
-        this.userC = userC;
-    }
-
-    public void setProductCs(ArrayList<ProductC> productCs) {
-        this.productCs = productCs;
     }
 }

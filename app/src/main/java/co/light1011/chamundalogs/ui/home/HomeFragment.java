@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import co.light1011.chamundalogs.R;
 import co.light1011.chamundalogs.model.TableC;
@@ -43,17 +43,19 @@ public class HomeFragment extends Fragment {
         root.findViewById(R.id.addTable).setOnClickListener( v -> onAddNewTableClicked());
 
 
-        activeTablesListAdapter = new ActiveTableListAdapter(homeViewModel.getTables().getValue());
+        activeTablesListAdapter = new ActiveTableListAdapter(new ActiveTableListAdapter.TableCDiff());
+
         activeTables.setHasFixedSize(true);
         activeTables.setLayoutManager(new StaggeredGridLayoutManager(2,1));
+
         activeTables.setAdapter(activeTablesListAdapter);
 
         return root;
     }
 
-    Observer<ArrayList<TableC>> tableListUpdateObserver = new Observer<ArrayList<TableC>>() {
+    Observer<List<TableC>> tableListUpdateObserver = new Observer<List<TableC>>() {
         @Override
-        public void onChanged(@Nullable ArrayList<TableC> _tables) {
+        public void onChanged(@Nullable List<TableC> _tables) {
             if(_tables.size() == 0){
                 noCustomerTextView.setText("Add Tables");
                 return;
@@ -61,14 +63,18 @@ public class HomeFragment extends Fragment {
             noCustomerTextView.setVisibility(View.GONE);
             activeTables.setVisibility(View.VISIBLE);
 
-            activeTablesListAdapter.updateList(_tables);
-            activeTablesListAdapter.notifyDataSetChanged();
+            activeTablesListAdapter.submitList(_tables);
+//            activeTablesListAdapter.notifyDataSetChanged();
 
 
         }
     };
 
     private void onAddNewTableClicked(){
-        homeViewModel.addTable(new TableC());
+        int index = homeViewModel.getTables().getValue().size() + 1;
+        TableC tableC = new TableC();
+        tableC.setId(index+"");
+        tableC.setUserId(index+"");
+        homeViewModel.addTable(tableC);
     }
 }

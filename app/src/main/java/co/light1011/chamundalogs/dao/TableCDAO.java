@@ -1,12 +1,13 @@
 package co.light1011.chamundalogs.dao;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import co.light1011.chamundalogs.model.TableC;
 
@@ -22,5 +23,5 @@ public interface TableCDAO {
     void deleteAll();
 
     @Query("SELECT * FROM tableC_table ORDER BY id ASC")
-    MutableLiveData<ArrayList<TableC>> getTables();
+    LiveData<List<TableC>> getTables();
 }

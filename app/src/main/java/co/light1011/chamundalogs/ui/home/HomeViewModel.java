@@ -1,28 +1,35 @@
 package co.light1011.chamundalogs.ui.home;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-import java.util.ArrayList;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
+
+import java.util.List;
 
 import co.light1011.chamundalogs.model.TableC;
+import co.light1011.chamundalogs.utils.ChamundaAnalyticsRepository;
 
-public class HomeViewModel extends ViewModel {
+public class HomeViewModel extends AndroidViewModel {
 
-    private MutableLiveData<ArrayList<TableC>> tables;
+    private ChamundaAnalyticsRepository mRepository;
 
-    public HomeViewModel() {
-        tables = new MutableLiveData<>();
-        tables.setValue(new ArrayList<>());
+    private LiveData<List<TableC>> tables;
+
+    public HomeViewModel(Application application) {
+        super(application);
+
+        mRepository = new ChamundaAnalyticsRepository(application);
+        tables = mRepository.getTables();
+
     }
 
-    public LiveData<ArrayList<TableC>> getTables() {
+    public LiveData<List<TableC>> getTables() {
         return  tables;
     }
 
     public void addTable(TableC _table){
-        tables.getValue().add(_table);
-        tables.postValue(tables.getValue());
+        mRepository.addTable(_table);
     }
 }
