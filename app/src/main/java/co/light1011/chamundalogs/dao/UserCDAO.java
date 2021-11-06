@@ -8,7 +8,7 @@ import androidx.room.Query;
 
 import java.util.ArrayList;
 
-import co.light1011.chamundalogs.model.TableC;
+import co.light1011.chamundalogs.model.UserC;
 
 @Dao
 public interface UserCDAO {
@@ -16,11 +16,11 @@ public interface UserCDAO {
     // allowing the insert of the same word multiple times by passing a
     // conflict resolution strategy
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(TableC table);
+    void insert(UserC table);
 
     @Query("DELETE FROM userC_table")
     void deleteAll();
 
     @Query("SELECT * FROM userC_table ORDER BY id ASC")
-    MutableLiveData<ArrayList<TableC>> getUsers();
+    MutableLiveData<ArrayList<UserC>> getUsers();
 }
