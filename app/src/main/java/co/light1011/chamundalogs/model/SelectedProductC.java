@@ -19,4 +19,28 @@ public class SelectedProductC {
     @ColumnInfo(name = "quantity")
     private float quantity;
 
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public float getQuantity() {
+        return quantity;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setId(@NonNull String id) {
+        this.id = id;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public void setQuantity(float quantity) {
+        this.quantity = quantity;
+    }
 }
