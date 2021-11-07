@@ -9,7 +9,6 @@ import androidx.room.Query;
 import java.util.List;
 
 import co.light1011.chamundalogs.model.SelectedProductC;
-import co.light1011.chamundalogs.model.UserC;
 
 @Dao
 public interface SelectedProductCDAO {
