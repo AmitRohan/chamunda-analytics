@@ -22,7 +22,7 @@ public class UsersFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         usersViewModel =
                 new ViewModelProvider(this).get(UsersViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View root = inflater.inflate(R.layout.fragment_users, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
         usersViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

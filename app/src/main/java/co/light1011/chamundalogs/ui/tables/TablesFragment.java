@@ -32,7 +32,7 @@ public class TablesFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         tablesViewModel =
                 new ViewModelProvider(this).get(TablesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_tables, container, false);
 
         noCustomerTextView = root.findViewById(R.id.text_no_customer);
 
