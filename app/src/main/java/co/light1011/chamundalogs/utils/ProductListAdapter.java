@@ -28,7 +28,7 @@ public class ProductListAdapter extends ListAdapter<ProductC, ProductListAdapter
     @Override
     public void onBindViewHolder(ActiveTableViewHolder holder, int position) {
         ProductC current = getItem(position);
-        holder.bind(""+(position + 1));
+        holder.bind(position,current);
     }
 
     public static class ProductCDiff extends DiffUtil.ItemCallback<ProductC> {
@@ -45,15 +45,21 @@ public class ProductListAdapter extends ListAdapter<ProductC, ProductListAdapter
     }
 
     static class ActiveTableViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tableIndex;
+        private final TextView productId;
+        private final TextView productName;
+        private final TextView productPrice;
 
         private ActiveTableViewHolder(View itemView) {
             super(itemView);
-            this.tableIndex = (TextView) itemView.findViewById(R.id.tableIndex);
+            this.productId = (TextView) itemView.findViewById(R.id.productIndex);
+            this.productName = (TextView) itemView.findViewById(R.id.productName);
+            this.productPrice = (TextView) itemView.findViewById(R.id.productCost);
         }
 
-        public void bind(String text) {
-            tableIndex.setText(text);
+        public void bind(int position,ProductC productC) {
+            productId.setText(productC.getId());
+            productName.setText(productC.getName());
+            productPrice.setText(productC.getPrice() + " INR");
         }
 
         static ActiveTableViewHolder create(ViewGroup parent) {

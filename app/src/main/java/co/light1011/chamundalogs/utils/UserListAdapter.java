@@ -55,7 +55,7 @@ public class UserListAdapter extends ListAdapter<UserC, UserListAdapter.ActiveTa
         }
 
         public void bind(int position, UserC user) {
-            tableIndex.setText(""+(position + 1));
+            tableIndex.setText(user.getId());
             userName.setText(user.getName());
         }
 
