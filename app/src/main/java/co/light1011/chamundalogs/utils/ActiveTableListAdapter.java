@@ -58,7 +58,7 @@ public class ActiveTableListAdapter extends ListAdapter<TableC,ActiveTableListAd
 
         static ActiveTableViewHolder create(ViewGroup parent) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_active_table, parent, false);
+                    .inflate(R.layout.list_item_active_table, parent, false);
             return new ActiveTableViewHolder(view);
         }
     }
