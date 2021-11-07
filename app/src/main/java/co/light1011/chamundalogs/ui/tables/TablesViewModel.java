@@ -1,4 +1,4 @@
-package co.light1011.chamundalogs.ui.home;
+package co.light1011.chamundalogs.ui.tables;
 
 import android.app.Application;
 
@@ -11,13 +11,13 @@ import java.util.List;
 import co.light1011.chamundalogs.model.TableC;
 import co.light1011.chamundalogs.utils.ChamundaAnalyticsRepository;
 
-public class HomeViewModel extends AndroidViewModel {
+public class TablesViewModel extends AndroidViewModel {
 
     private ChamundaAnalyticsRepository mRepository;
 
     private LiveData<List<TableC>> tables;
 
-    public HomeViewModel(Application application) {
+    public TablesViewModel(Application application) {
         super(application);
 
         mRepository = new ChamundaAnalyticsRepository(application);

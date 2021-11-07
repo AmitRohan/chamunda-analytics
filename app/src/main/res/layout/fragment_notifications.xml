@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/padding_adjustments"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".ui.users.UsersFragment">
 
     <TextView
         android:id="@+id/text_notifications"

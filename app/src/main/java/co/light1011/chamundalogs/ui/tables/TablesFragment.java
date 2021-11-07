@@ -1,4 +1,4 @@
-package co.light1011.chamundalogs.ui.home;
+package co.light1011.chamundalogs.ui.tables;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,25 +20,25 @@ import co.light1011.chamundalogs.R;
 import co.light1011.chamundalogs.model.TableC;
 import co.light1011.chamundalogs.utils.ActiveTableListAdapter;
 
-public class HomeFragment extends Fragment {
+public class TablesFragment extends Fragment {
 
     private RecyclerView activeTables;
     private ActiveTableListAdapter activeTablesListAdapter;
 
-    private HomeViewModel homeViewModel;
+    private TablesViewModel tablesViewModel;
     private TextView noCustomerTextView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        tablesViewModel =
+                new ViewModelProvider(this).get(TablesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         noCustomerTextView = root.findViewById(R.id.text_no_customer);
 
         activeTables = root.findViewById(R.id.activeTables);
 
-        homeViewModel.getTables().observe(getViewLifecycleOwner(),tableListUpdateObserver);
+        tablesViewModel.getTables().observe(getViewLifecycleOwner(),tableListUpdateObserver);
 
         root.findViewById(R.id.addTable).setOnClickListener( v -> onAddNewTableClicked());
 
@@ -71,10 +71,10 @@ public class HomeFragment extends Fragment {
     };
 
     private void onAddNewTableClicked(){
-        int index = homeViewModel.getTables().getValue().size() + 1;
+        int index = tablesViewModel.getTables().getValue().size() + 1;
         TableC tableC = new TableC();
         tableC.setId(index+"");
         tableC.setUserId(index+"");
-        homeViewModel.addTable(tableC);
+        tablesViewModel.addTable(tableC);
     }
 }

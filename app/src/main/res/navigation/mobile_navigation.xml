@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="co.light1011.chamundalogs.ui.home.HomeFragment"
+        android:name="co.light1011.chamundalogs.ui.tables.TablesFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="co.light1011.chamundalogs.ui.notifications.NotificationsFragment"
+        android:name="co.light1011.chamundalogs.ui.users.UsersFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

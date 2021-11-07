@@ -1,14 +1,14 @@
-package co.light1011.chamundalogs.ui.notifications;
+package co.light1011.chamundalogs.ui.products;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class ProductsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public ProductsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is notifications fragment");
     }
