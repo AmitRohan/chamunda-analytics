@@ -59,6 +59,10 @@ public class ChamundaAnalyticsRepository {
         return allProducts;
     }
 
+    public LiveData<List<SelectedProductC>> getSelectedProducts() {
+        return allSelectedProducts;
+    }
+
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
     public void addTable(TableC tableC) {
@@ -76,6 +80,12 @@ public class ChamundaAnalyticsRepository {
     public void addUser(UserC userC) {
         ChamundaAnalyticsDatabase.databaseWriteExecutor.execute(() -> {
             userCDAO.insert(userC);
+        });
+    }
+
+    public void addSelectedProduct(SelectedProductC selectedProductC) {
+        ChamundaAnalyticsDatabase.databaseWriteExecutor.execute(() -> {
+            selectedProductCDAO.insert(selectedProductC);
         });
     }
 }

@@ -23,7 +23,7 @@ import co.light1011.chamundalogs.model.UserC;
 
 // Update version when Schema changes
 
-@Database(entities = {ProductC.class, UserC.class ,TableC.class}, version = 1, exportSchema = false)
+@Database(entities = {ProductC.class, UserC.class ,TableC.class, SelectedProductC.class}, version = 1, exportSchema = false)
 public abstract class ChamundaAnalyticsDatabase extends RoomDatabase {
 
     public abstract ProductCDAO productCDAO();
