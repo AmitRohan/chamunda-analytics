@@ -1,19 +1,34 @@
 package co.light1011.chamundalogs.ui.users;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class UsersViewModel extends ViewModel {
+import java.util.List;
 
-    private MutableLiveData<String> mText;
+import co.light1011.chamundalogs.model.UserC;
+import co.light1011.chamundalogs.utils.ChamundaAnalyticsRepository;
 
-    public UsersViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+public class UsersViewModel extends AndroidViewModel {
+
+    private ChamundaAnalyticsRepository mRepository;
+    private LiveData<List<UserC>> users;
+
+    public UsersViewModel(Application application) {
+        super((application));
+        mRepository = new ChamundaAnalyticsRepository(application);
+        users = mRepository.getUsers();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<UserC>> getUsers() {
+        return users;
     }
+
+    public void addUsers(UserC _user){
+        mRepository.addUser(_user);
+    }
+
+
+
 }
