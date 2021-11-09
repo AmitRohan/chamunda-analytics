@@ -1,6 +1,7 @@
 package co.light1011.chamundalogs.ui.tables;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Objects;
 
 import co.light1011.chamundalogs.R;
+import co.light1011.chamundalogs.UpdateTableActivity;
 import co.light1011.chamundalogs.model.SelectedProductC;
 import co.light1011.chamundalogs.model.TableC;
 import co.light1011.chamundalogs.model.UserC;
@@ -32,7 +34,7 @@ import co.light1011.chamundalogs.utils.ActiveTableListAdapter;
 import co.light1011.chamundalogs.utils.ChamundaAnalyticsRepository;
 import co.light1011.chamundalogs.utils.CustomViewModelFactory;
 
-public class TablesFragment extends Fragment {
+public class TablesFragment extends Fragment implements ActiveTableListAdapter.ActiveTableCallbacks {
 
     ChamundaAnalyticsRepository repository;
     public TablesFragment(ChamundaAnalyticsRepository car){
@@ -64,7 +66,7 @@ public class TablesFragment extends Fragment {
         root.findViewById(R.id.addTable).setOnClickListener( v -> onAddNewTableClicked());
 
 
-        activeTablesListAdapter = new ActiveTableListAdapter(new ActiveTableListAdapter.TableCDiff());
+        activeTablesListAdapter = new ActiveTableListAdapter(new ActiveTableListAdapter.TableCDiff(),this);
 
         activeTables.setHasFixedSize(true);
         activeTables.setLayoutManager(new StaggeredGridLayoutManager(2,1));
@@ -166,5 +168,13 @@ public class TablesFragment extends Fragment {
 
         builder.setView(viewInflated);
         builder.show();
+    }
+
+    @Override
+    public void onTableSelected(TableC table) {
+        Intent updateTableDetailsIntent = new Intent(getActivity(), UpdateTableActivity.class);
+        updateTableDetailsIntent.putExtra("selectedTable",table);
+        startActivity(updateTableDetailsIntent);
+
     }
 }
