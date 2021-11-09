@@ -28,7 +28,7 @@ public class ActiveTableListAdapter extends ListAdapter<TableC,ActiveTableListAd
     @Override
     public void onBindViewHolder(ActiveTableViewHolder holder, int position) {
         TableC current = getItem(position);
-        holder.bind(""+(position + 1));
+        holder.bind(position,current);
     }
 
     public static class TableCDiff extends DiffUtil.ItemCallback<TableC> {
@@ -46,14 +46,18 @@ public class ActiveTableListAdapter extends ListAdapter<TableC,ActiveTableListAd
 
     static class ActiveTableViewHolder extends RecyclerView.ViewHolder {
         private final TextView tableIndex;
+        private final TextView tableUser;
 
         private ActiveTableViewHolder(View itemView) {
             super(itemView);
             this.tableIndex = (TextView) itemView.findViewById(R.id.tableIndex);
+            this.tableUser = (TextView) itemView.findViewById(R.id.tableUser);
         }
 
-        public void bind(String text) {
-            tableIndex.setText(text);
+        public void bind(int position,TableC tableC) {
+
+            tableIndex.setText(tableC.getId());
+            tableUser.setText(tableC.getUserName());
         }
 
         static ActiveTableViewHolder create(ViewGroup parent) {

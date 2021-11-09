@@ -55,6 +55,10 @@ public class ChamundaAnalyticsRepository {
         return allUsers;
     }
 
+    public LiveData<List<UserC>> getUserByName(String userName) {
+        return userCDAO.getUsersByName(userName);
+    }
+
     public LiveData<List<ProductC>> getProducts() {
         return allProducts;
     }

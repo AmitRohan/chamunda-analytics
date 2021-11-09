@@ -16,9 +16,11 @@ public class SelectedProductListConverter {
     public List<SelectedProductC> storedStringToProductIds(String value) {
         List<String> _toReturn = Arrays.asList(value.split("\\s*,-,\\s*"));
         List<SelectedProductC> toReturn = Collections.<SelectedProductC>emptyList();
+        if(_toReturn.size() == 0 || !_toReturn.get(0).equals("")){
+            for (String json : _toReturn)
+                toReturn.add(gson.fromJson(json, SelectedProductC.class));
+        }
 
-        for (String json : _toReturn)
-            toReturn.add(gson.fromJson(json, SelectedProductC.class));
         return toReturn;
     }
 
