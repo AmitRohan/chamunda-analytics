@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TablesFragment  tablesFragment;
     UsersFragment usersFragment;
 
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         ChamundaAnalyticsRepository chamundaAnalyticsRepository =new ChamundaAnalyticsRepository(getApplication());
 
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        bottomNavigationView = findViewById(R.id.nav_view);
 
         dashboardFragment = new DashboardFragment();
         productsFragment = new ProductsFragment(chamundaAnalyticsRepository);
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         usersFragment = new UsersFragment(chamundaAnalyticsRepository);
 
 
-        navView.setOnNavigationItemSelectedListener(item -> {
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.navigation_tables:
                     getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, tablesFragment).commit();
@@ -51,8 +52,16 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-        navView.setSelectedItemId(R.id.navigation_tables);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_tables);
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(bottomNavigationView.getSelectedItemId() != R.id.navigation_tables){
+            bottomNavigationView.setSelectedItemId(R.id.navigation_tables);
+            return;
+        }
+        super.onBackPressed();
+    }
 }
