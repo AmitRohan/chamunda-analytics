@@ -18,8 +18,11 @@ public class TableC {
     @ColumnInfo(name = "id")
     private String id;
 
-    @ColumnInfo(name = "user")
+    @ColumnInfo(name = "userId")
     private String userId;
+
+    @ColumnInfo(name = "userName")
+    private String userName;
 
     @ColumnInfo(name = "products")
     @TypeConverters(SelectedProductListConverter.class)
@@ -48,5 +51,13 @@ public class TableC {
 
     public void setId(@NonNull String id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
