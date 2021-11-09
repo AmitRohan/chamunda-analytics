@@ -15,9 +15,9 @@ public class UsersViewModel extends AndroidViewModel {
     private ChamundaAnalyticsRepository mRepository;
     private LiveData<List<UserC>> users;
 
-    public UsersViewModel(Application application) {
+    public UsersViewModel(Application application, ChamundaAnalyticsRepository _mRepository) {
         super((application));
-        mRepository = new ChamundaAnalyticsRepository(application);
+        mRepository = _mRepository;
         users = mRepository.getUsers();
     }
 

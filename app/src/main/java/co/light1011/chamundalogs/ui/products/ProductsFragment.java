@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -22,11 +23,20 @@ import java.util.List;
 import co.light1011.chamundalogs.R;
 import co.light1011.chamundalogs.model.ProductC;
 import co.light1011.chamundalogs.model.UserC;
+import co.light1011.chamundalogs.ui.tables.TablesViewModel;
 import co.light1011.chamundalogs.ui.users.UsersViewModel;
+import co.light1011.chamundalogs.utils.ChamundaAnalyticsRepository;
+import co.light1011.chamundalogs.utils.CustomViewModelFactory;
 import co.light1011.chamundalogs.utils.ProductListAdapter;
 import co.light1011.chamundalogs.utils.UserListAdapter;
 
 public class ProductsFragment extends Fragment {
+
+    ChamundaAnalyticsRepository repository;
+    public ProductsFragment(ChamundaAnalyticsRepository car){
+        // require a empty public constructor
+        repository = car;
+    }
 
     private ProductsViewModel productsViewModel;
 
@@ -37,8 +47,9 @@ public class ProductsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        productsViewModel =
-                new ViewModelProvider(this).get(ProductsViewModel.class);
+        productsViewModel = ViewModelProviders.of(this,
+                        new CustomViewModelFactory(getActivity().getApplication(), repository))
+                        .get(ProductsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_products, container, false);
 
         noUserTextView = root.findViewById(R.id.text_no_products);

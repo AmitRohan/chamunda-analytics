@@ -13,9 +13,9 @@ import co.light1011.chamundalogs.utils.ChamundaAnalyticsRepository;
 public class ProductsViewModel extends AndroidViewModel {
 
 
-    public ProductsViewModel(Application application) {
+    public ProductsViewModel(Application application,ChamundaAnalyticsRepository _repository) {
         super((application));
-        mRepository = new ChamundaAnalyticsRepository(application);
+        mRepository = _repository;
         products = mRepository.getProducts();
     }
 

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -22,9 +23,19 @@ import java.util.List;
 
 import co.light1011.chamundalogs.R;
 import co.light1011.chamundalogs.model.UserC;
+import co.light1011.chamundalogs.ui.tables.TablesViewModel;
+import co.light1011.chamundalogs.utils.ChamundaAnalyticsRepository;
+import co.light1011.chamundalogs.utils.CustomViewModelFactory;
 import co.light1011.chamundalogs.utils.UserListAdapter;
 
 public class UsersFragment extends Fragment {
+
+
+    ChamundaAnalyticsRepository repository;
+    public UsersFragment(ChamundaAnalyticsRepository car){
+        // require a empty public constructor
+        repository = car;
+    }
 
     private UsersViewModel usersViewModel;
     private RecyclerView savedUsersRecyclerView;
@@ -33,8 +44,11 @@ public class UsersFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        usersViewModel =
-                new ViewModelProvider(this).get(UsersViewModel.class);
+
+        usersViewModel = ViewModelProviders.of(this,
+                new CustomViewModelFactory(getActivity().getApplication(), repository))
+                .get(UsersViewModel.class);
+//
         View root = inflater.inflate(R.layout.fragment_users, container, false);
 
         noUserTextView = root.findViewById(R.id.text_no_user);
