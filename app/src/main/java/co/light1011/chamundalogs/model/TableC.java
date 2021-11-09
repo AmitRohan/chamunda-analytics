@@ -6,12 +6,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import java.io.Serializable;
 import java.util.List;
 
 import co.light1011.chamundalogs.utils.SelectedProductListConverter;
 
 @Entity(tableName = "tableC_table")
-public class TableC {
+public class TableC implements Serializable {
 
     @PrimaryKey
     @NonNull
